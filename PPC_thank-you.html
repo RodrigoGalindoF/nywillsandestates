@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You — NY Wills & Estates</title>
+
+  <!-- Block search indexing on the thank-you page -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Fonts — match landing page exactly -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+
+  <style>
+    /* ============================================
+       CSS VARIABLES — Identical to landing page
+       ============================================ */
+    :root {
+      --green:        #005030;
+      --green-deep:   #004a2c;
+      --green-border: #004228;
+      --green-light:  #00693f;
+      --green-muted:  #e6f0eb;
+      --green-trust:  #16a34a;
+      --orange:       #FF941D;
+      --orange-light: #FFab4d;
+      --orange-pale:  #fff4e6;
+      --orange-dark:  #e07d0a;
+      --cream:        #faf9f6;
+      --warm-white:   #fdfcfa;
+      --text-dark:    #1f2937;
+      --text-body:    #374151;
+      --text-light:   #6b7280;
+      --border:       #dde5df;
+
+      --font-display: 'Lora', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --container:    min(860px, 92vw);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-body);
+      background: var(--warm-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-top: 44px; /* height of top bar */
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.7); }
+      to   { opacity: 1; transform: scale(1);   }
+    }
+
+    @keyframes checkDraw {
+      from { stroke-dashoffset: 60; }
+      to   { stroke-dashoffset: 0;  }
+    }
+
+    @keyframes ringPulse {
+      0%   { box-shadow: 0 0 0 0   rgba(0, 80, 48, 0.25); }
+      70%  { box-shadow: 0 0 0 20px rgba(0, 80, 48, 0);   }
+      100% { box-shadow: 0 0 0 0   rgba(0, 80, 48, 0);    }
+    }
+
+    @keyframes barFill {
+      from { width: 0%; }
+      to   { width: 100%; }
+    }
+
+    .fade-up { animation: fadeUp 0.65s ease-out both; }
+    .d1 { animation-delay: 0.15s; }
+    .d2 { animation-delay: 0.30s; }
+    .d3 { animation-delay: 0.45s; }
+    .d4 { animation-delay: 0.60s; }
+    .d5 { animation-delay: 0.75s; }
+    .d6 { animation-delay: 0.90s; }
+
+    /* ============================================
+       TOP BAR — matches landing page
+       ============================================ */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: white;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.55rem 0;
+      text-align: center;
+      border-bottom: 1px solid #e8e8e4;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .top-bar__text {
+      color: var(--text-body);
+      letter-spacing: 0.01em;
+    }
+
+    .top-bar__sep {
+      display: inline-block;
+      width: 1px; height: 12px;
+      background: #d1d1cd;
+      margin: 0 0.75rem;
+      vertical-align: -1px;
+    }
+
+    .top-bar__call {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.38rem 1rem;
+      background: var(--orange);
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(255,148,29,0.35);
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+
+    .top-bar__call:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(255,148,29,0.4);
+    }
+
+    @media (max-width: 600px) {
+      .top-bar__text { display: none; }
+      .top-bar { justify-content: flex-start; padding: 0.5rem 1rem; }
+      body { padding-top: 52px; }
+    }
+
+    /* ============================================
+       HERO STRIP — brand green, like landing page
+       ============================================ */
+    .hero-strip {
+      background: linear-gradient(160deg, var(--green) 0%, var(--green-deep) 55%, #003a20 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 3rem 0 4rem;
+    }
+
+    /* Orange accent line at top */
+    .hero-strip::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-light), var(--orange));
+    }
+
+    /* Subtle ambient glow */
+    .hero-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 80%, rgba(255,148,29,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 10%, rgba(255,148,29,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-strip__inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    /* ── Animated checkmark circle ── */
+    .success-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: scaleIn 0.55s cubic-bezier(0.34,1.56,0.64,1) 0.1s both,
+                 ringPulse 1.8s ease-out 0.7s 2;
+    }
+
+    .success-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .check-circle {
+      fill: none;
+      stroke: var(--orange);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .check-mark {
+      fill: none;
+      stroke: white;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: checkDraw 0.5s ease-out 0.65s forwards;
+    }
+
+    .hero-strip__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,148,29,0.12);
+      border: 1px solid rgba(255,148,29,0.28);
+      color: var(--orange-light);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.38rem 1rem;
+      border-radius: 100px;
+    }
+
+    .hero-strip__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.18;
+    }
+
+    .hero-strip__title em {
+      font-style: normal;
+      color: var(--orange-light);
+    }
+
+    .hero-strip__desc {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.88);
+      max-width: 580px;
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       MAIN CONTENT CARD
+       ============================================ */
+    .content-wrap {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ── Pull the card up slightly to overlap hero ── */
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.04),
+        0 20px 50px rgba(0,0,0,0.08);
+      overflow: hidden;
+      margin-top: -2.5rem;
+    }
+
+    .card__body {
+      padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    /* ============================================
+       WHAT HAPPENS NEXT — Numbered Timeline
+       ============================================ */
+    .steps-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .steps-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Flexbox row: number circle + text block side by side */
+    .step {
+      display: flex;
+      flex-direction: row;
+      align-items: center;  /* centers number against text block height only */
+      gap: 1.25rem;
+      position: relative;
+      padding-bottom: 1.75rem; /* inter-step spacing outside flex content area */
+    }
+
+    .step:last-child {
+      padding-bottom: 0;
+    }
+
+    /* Connector line: starts at bottom of number circle, ends at top of next step */
+    .step:not(:last-child) .step__line {
+      position: absolute;
+      left: 21px;             /* horizontal center of 44px circle */
+      top: calc(50% + 22px); /* 22px = half the circle — starts below it */
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--green-muted), transparent);
+    }
+
+    .step__number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--green-muted);
+      border: 2px solid #c8ddd1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--green);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .step:hover .step__number {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    /* Text block fills remaining width */
+    .step__content {
+      flex: 1;
+    }
+
+    .step__title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-dark);
+      margin-top: 0;
+      margin-bottom: 0.2rem;
+    }
+
+    .step__desc {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.55;
+    }
+
+    /* ============================================
+       URGENT CALL BOX
+       ============================================ */
+    .urgent-box {
+      background: var(--orange-pale);
+      border: 1.5px solid #f0c070;
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .urgent-box__left {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+    }
+
+    .urgent-box__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .urgent-box__icon svg {
+      width: 20px;
+      height: 20px;
+      color: white;
+    }
+
+    .urgent-box__label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9a5b00;
+      margin-bottom: 0.2rem;
+    }
+
+    .urgent-box__text {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .urgent-box__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      background: var(--orange);
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 10px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(255,148,29,0.3);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .urgent-box__cta:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255,148,29,0.35);
+    }
+
+    /* ============================================
+       TRUST REASSURANCE ROW
+       ============================================ */
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+    }
+
+    .trust-item {
+      background: white;
+      padding: 1.1rem 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .trust-item__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--green-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .trust-item__icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--green);
+    }
+
+    .trust-item__label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .trust-item__sub {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    /* ============================================
+       CLOSING MESSAGE
+       ============================================ */
+    .closing {
+      text-align: center;
+      padding: 1.75rem clamp(1rem, 4vw, 2rem) 0;
+      border-top: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+
+    .closing__quote {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--green);
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .closing__sub {
+      font-size: 0.88rem;
+      color: var(--text-light);
+    }
+
+    .closing__offices {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    .closing__sep {
+      display: inline-block;
+      width: 1px;
+      height: 12px;
+      background: #d1d1cd;
+    }
+
+    /* ============================================
+       FOOTER — matches landing page
+       ============================================ */
+    .footer {
+      background: var(--green-deep);
+      color: rgba(255,255,255,0.6);
+      font-size: 0.78rem;
+      line-height: 1.7;
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .footer a { color: rgba(255,255,255,0.75); }
+    .footer a:hover { color: white; }
+
+    .footer__inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .footer p + p { margin-top: 0.5rem; }
+
+    .footer__10dlc {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.72rem;
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 620px) {
+      .trust-row {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item {
+        flex-direction: row;
+        text-align: left;
+        justify-content: flex-start;
+        gap: 0.75rem;
+      }
+
+      .urgent-box {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+
+      .urgent-box__left {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .urgent-box__cta {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-strip { padding: 2.5rem 0 3.5rem; }
+      .success-icon { width: 72px; height: 72px; }
+      .success-icon svg { width: 40px; height: 40px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================
+       TOP BAR — matches landing page
+       ============================================ -->
+  <header class="top-bar" role="banner">
+    <span class="top-bar__text">
+      <!-- pin SVG -->
+      <svg style="display:inline;width:12px;height:12px;vertical-align:-1px;margin-right:3px;color:#005030;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+      Serving NY &amp; NJ — Manhattan &bull; Hackensack
+    </span>
+    <span class="top-bar__sep"></span>
+    <a href="tel:5164693492" class="top-bar__call" aria-label="Call us at 516-469-3492">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (516) 469-3492
+    </a>
+  </header>
+
+  <!-- ============================================
+       HERO STRIP — Confirmation message
+       ============================================ -->
+  <section class="hero-strip" aria-label="Request confirmed">
+    <div class="hero-strip__inner">
+
+      <!-- Animated checkmark -->
+      <div class="success-icon" role="img" aria-label="Success">
+        <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle class="check-circle" cx="26" cy="26" r="23" />
+          <polyline class="check-mark" points="14,27 22,35 38,18" />
+        </svg>
+      </div>
+
+      <span class="hero-strip__eyebrow fade-up d1" aria-label="Status">
+        <svg style="width:12px;height:12px;" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        Request Received
+      </span>
+
+      <h1 class="hero-strip__title fade-up d2">
+        Thank You — We've Got<br>
+        <em>Your Request</em>
+      </h1>
+
+      <p class="hero-strip__desc fade-up d3">
+        A member of our team will reach out within <strong style="color:white;">1 business day</strong> to confirm your details and schedule your free strategy call.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       MAIN CONTENT
+       ============================================ -->
+  <main class="content-wrap" id="main-content">
+
+    <!-- ── Primary card ── -->
+    <div class="card fade-up d4" role="region" aria-labelledby="next-steps-title">
+      <div class="card__body">
+
+        <!-- What Happens Next -->
+        <h2 class="steps-title" id="next-steps-title">
+          <svg style="width:20px;height:20px;color:var(--orange);flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          What Happens Next
+        </h2>
+
+        <ol class="steps" aria-label="Process steps">
+
+          <li class="step">
+            <div class="step__line" aria-hidden="true"></div>
+            <div class="step__number" aria-hidden="true">1</div>
+            <div class="step__content">
+              <p class="step__title">Our intake team reviews your information</p>
+              <p class="step__desc">We'll look over what you've shared so the right person is prepared when we reach out — no repeating yourself on the call.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <div class="step__line" aria-hidden="true"></div>
+            <div class="step__number" aria-hidden="true">2</div>
+            <div class="step__content">
+              <p class="step__title">We contact you to confirm details</p>
+              <p class="step__desc">Expect a call or email within 1 business day. We'll verify a few quick details and find a time that works for you.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <div class="step__line" aria-hidden="true"></div>
+            <div class="step__number" aria-hidden="true">3</div>
+            <div class="step__content">
+              <p class="step__title">You meet with an estate planning attorney</p>
+              <p class="step__desc">Your free strategy consultation is with a member of our planning team who can answer your questions and help you understand your options.</p>
+            </div>
+          </li>
+
+          <li class="step">
+            <div class="step__number" aria-hidden="true">4</div>
+            <div class="step__content">
+              <p class="step__title">We walk you through fees and next steps</p>
+              <p class="step__desc">Everything in plain English, upfront, and without pressure. You'll leave knowing exactly what's involved and what protecting your family will look like.</p>
+            </div>
+          </li>
+
+        </ol>
+
+        <!-- Closing quote -->
+        <div class="closing fade-up d5">
+          <p class="closing__quote">
+            "You've already taken the most important step — deciding your family's future deserves a plan."
+          </p>
+          <p class="closing__sub">We look forward to speaking with you.</p>
+          <p class="closing__offices">
+            <svg style="width:12px;height:12px;flex-shrink:0;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+            Manhattan, NY
+            <span class="closing__sep" aria-hidden="true"></span>
+            Hackensack, NJ
+            <span class="closing__sep" aria-hidden="true"></span>
+            NY &amp; NJ Licensed
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Urgent call box ── -->
+    <div class="urgent-box fade-up d5" role="complementary" aria-label="Urgent contact option">
+      <div class="urgent-box__left">
+        <div class="urgent-box__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <p class="urgent-box__label">Need to speak with us today?</p>
+          <p class="urgent-box__text">If your matter is time-sensitive, don't wait — call us directly and we'll do our best to assist you right away.</p>
+        </div>
+      </div>
+      <a href="tel:5164693492" class="urgent-box__cta" aria-label="Call 516-469-3492">
+        <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (516) 469-3492
+      </a>
+    </div>
+
+    <!-- ── Trust signals row ── -->
+    <div class="trust-row fade-up d6" role="list" aria-label="Trust signals">
+
+      <div class="trust-item" role="listitem">
+        <div class="trust-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <p class="trust-item__label">Attorney–Client Confidential</p>
+          <p class="trust-item__sub">Everything you share is protected</p>
+        </div>
+      </div>
+
+      <div class="trust-item" role="listitem">
+        <div class="trust-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <p class="trust-item__label">Response Within 1 Business Day</p>
+          <p class="trust-item__sub">Mon–Fri, 9 am – 6 pm</p>
+        </div>
+      </div>
+
+      <div class="trust-item" role="listitem">
+        <div class="trust-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div>
+          <p class="trust-item__label">Free Strategy Call</p>
+          <p class="trust-item__sub">No commitment, no pressure</p>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER — matches landing page
+       ============================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <p>© 2026 NY Wills &amp; Estates. All rights reserved. | <a href="privacy-policy/">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      <p>Attorney Advertising. Prior results do not guarantee a similar outcome. This website is for informational purposes only and does not constitute legal advice.</p>
+      <p class="footer__10dlc">By providing your phone number, you opt in to receive text messages from Law Offices of Vlad Portnoy, P.C. Message frequency may vary. Message and data rates may apply. Reply STOP to opt out. Reply HELP for assistance.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
